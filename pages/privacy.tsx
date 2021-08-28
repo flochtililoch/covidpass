@@ -10,7 +10,6 @@ function Privacy(): JSX.Element {
         <Page content={
             <Card step="i" heading={t('common:privacyPolicy')} content={
                 <div className="space-y-3">
-                    <p>{t('privacy:gdprNotice')}</p>
                     <p className="font-bold text-lg">{t('privacy:generalInfo')}</p>
                     <div className="pl-6">
                         <ul className="list-disc">
@@ -18,11 +17,17 @@ function Privacy(): JSX.Element {
                             <li>{t('privacy:generalInfoStoring')}</li>
                             <li>{t('privacy:generalInfoThirdParties')}</li>
                             <li>{t('privacy:generalInfoHttps')}</li>
-                            <li>{t('privacy:generalInfoLocation')}</li>
+                            <li>
+                                {t('privacy:generalInfoLocation')}
+                                &nbsp;
+                                <a href="https://vercel.com" className="underline">
+                                    Vercel
+                                </a>.
+                            </li>
                             <li>
                                 {t('privacy:generalInfoGitHub')}
                                 &nbsp;
-                                <a href="https://github.com/marvinsxtr/covidpass" className="underline">
+                                <a href="https://github.com/flochtililoch/covidpass" className="underline">
                                     GitHub
                                 </a>.
                             </li>
@@ -35,31 +40,18 @@ function Privacy(): JSX.Element {
                             </li>
                             <li>
                                 {t('privacy:generalInfoProvider')}
-                                <a href="https://www.hetzner.com/de/rechtliches/datenschutz/" className="underline">
+                                <a href="https://vercel.com/legal/privacy-policy" className="underline">
                                     {t('privacy:privacyPolicy')}
                                 </a>
                                 &nbsp;
                                 {t('privacy:andThe')} 
                                 &nbsp;
-                                <a href="https://docs.hetzner.com/general/general-terms-and-conditions/data-privacy-faq/privacy.tsx" className="underline">
+                                <a href="https://vercel.com/legal/dpa" className="underline">
                                     {t('privacy:dataPrivacyFaq')}
                                 </a>.
                             </li>
                         </ul>
                     </div>
-                    <p className="font-bold">{t('privacy:contact')}</p>
-                    <p>
-                        Marvin Sextro<br/>
-                        Wilhelm-Busch-Str. 8A<br/>
-                        30167 Hannover<br/>
-                        {t('privacy:email')}:
-                        &nbsp;
-                        <a href="mailto:marvin.sextro@gmail.com">marvin.sextro@gmail.com</a>
-                        <br/>
-                        {t('privacy:website')}:
-                        &nbsp;
-                        <a href="https://marvinsextro.de" className="underline">https://marvinsextro.de</a>
-                    </p>
                     <p className="font-bold">{t('privacy:process')}</p>
                     <p>{t('privacy:processFirst')}:</p>
                     <div className="pl-6">
@@ -90,21 +82,25 @@ function Privacy(): JSX.Element {
                     <p>
                         {t('privacy:the')}
                         &nbsp;
-                        <a href="https://github.com/ehn-dcc-development/ehn-dcc-schema" className="underline">
+                        <a href="https://myvaccinerecord.cdph.ca.gov" className="underline">
                             {t('privacy:schema')}
+                        </a>
+                        &nbsp;
+                        {t('privacy:isa')}
+                        &nbsp;
+                        <a href="https://spec.smarthealth.cards" className="underline">
+                            {t('privacy:smartHealthCard')}
                         </a>
                         &nbsp;
                         {t('privacy:specification')}
                     </p>
                     <p className="font-bold">{t('privacy:serverProvider')}</p>
-                    <p>{t('privacy:serverProviderIs')}</p>
                     <p>
-                        <a href="https://www.hetzner.com/" className="underline">
-                            Hetzner Online GmbH
-                        </a>
-                        <br />
-                        Industriestr. 25<br />
-                        91710 Gunzenhausen<br />
+                        {t('privacy:serverProviderIs')}
+                        &nbsp;
+                        <a href="https://vercel.com" className="underline">
+                            Vercel
+                        </a>.
                     </p>
                     <p>{t('privacy:logFiles')}:</p>
                     <div className="pl-6">
@@ -116,19 +112,16 @@ function Privacy(): JSX.Element {
                             <li>{t('privacy:logFilesIpAddress')}</li>
                         </ul>
                     </div>
-                    <p className="font-bold">{t('privacy:rights')}</p>
-                    <p>{t('privacy:rightsGranted')}:</p>
-                    <div className="pl-6">
-                        <ul className="list-disc">
-                            <li>{t('privacy:rightsAccess')}</li>
-                            <li>{t('privacy:rightsErasure')}</li>
-                            <li>{t('privacy:rightsRectification')}</li>
-                            <li>{t('privacy:rightsPortability')}</li>
-                        </ul>
-                    </div>
                     <p className="font-bold">{t('privacy:thirdParties')}</p>
                     <div className="pl-6">
                         <ul className="list-disc">
+                            <li>
+                                Vercel:
+                                &nbsp;
+                                <a href="https://vercel.com/legal/privacy-policy" className="underline">
+                                    {t('common:privacyPolicy')}
+                                </a>
+                            </li>
                             <li>
                                 GitHub:
                                 &nbsp;
@@ -137,16 +130,9 @@ function Privacy(): JSX.Element {
                                 </a>
                             </li>
                             <li>
-                                PayPal:
+                                Ko-fi:
                                 &nbsp;
-                                <a href="https://www.paypal.com/de/webapps/mpp/ua/privacy-full?locale.x=en_EN" className="underline">
-                                    {t('common:privacyPolicy')}
-                                </a>
-                            </li>
-                            <li>
-                                Gmail/Google:
-                                &nbsp;
-                                <a href="https://policies.google.com/privacy?hl=en-US" className="underline">
+                                <a href="https://more.ko-fi.com/privacy" className="underline">
                                     {t('common:privacyPolicy')}
                                 </a>
                             </li>

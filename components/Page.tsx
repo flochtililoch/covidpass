@@ -25,10 +25,10 @@ function Page(props: PageProps): JSX.Element {
 
                     <footer>
                         <nav className="nav flex pt-4 flex-row space-x-4 justify-center text-md font-bold flex-wrap">
-                            <a href="https://ko-fi.com/marvinsxtr" className="hover:underline">{t('common:donate')}</a>
-                            <a href="https://github.com/marvinsxtr/covidpass" className="hover:underline">{t('common:gitHub')}</a>
+                            <a href="https://ko-fi.com/floch" className="hover:underline">{t('common:donate')}</a>
+                            <a href="https://github.com/flochtililoch/covidpass" className="hover:underline">{t('common:gitHub')}</a>
                             <Link href="/privacy"><a className="hover:underline">{t('common:privacyPolicy')}</a></Link>
-                            <Link href="/imprint"><a className="hover:underline">{t('common:imprint')}</a></Link>
+                            <Link href="/credits"><a className="hover:underline">{t('common:credits')}</a></Link>
                         </nav>
                     </footer>
                 </main>

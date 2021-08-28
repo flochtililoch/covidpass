@@ -3,7 +3,6 @@ import {v4 as uuid4} from 'uuid';
 
 import {Constants} from "./constants";
 import {Payload, PayloadBody, PassDictionary} from "./payload";
-import {ValueSets} from "./value_sets";
 
 const crypto = require('crypto')
 
@@ -72,11 +71,8 @@ export class PassData {
     }
 
     static async generatePass(payloadBody: PayloadBody): Promise<Buffer> {
-        // Get the Value Sets from GitHub
-        const valueSets: ValueSets = await ValueSets.loadValueSets();
-
         // Create Payload
-        const payload: Payload = new Payload(payloadBody, valueSets);
+        const payload: Payload = new Payload(payloadBody);
 
         // Create QR Code Object
         const qrCode: QrCode = {
