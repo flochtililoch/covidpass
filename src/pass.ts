@@ -21,7 +21,7 @@ interface QrCode {
 }
 
 interface SignData {
-    PassJsonHash: string;
+    passJsonHash: string;
     useBlackVersion: boolean;
 }
 
@@ -117,11 +117,11 @@ export class PassData {
         zip.push({path: 'manifest.json', data: Buffer.from(manifestJson)});
 
         // Create pass hash
-        const passHash = PassData.getBufferHash(Buffer.from(passJson));
+        const passJsonHash = PassData.getBufferHash(Buffer.from(passJson));
 
         // Sign hash with server
         const manifestSignature = await PassData.signWithRemote({
-            PassJsonHash: passHash,
+            passJsonHash,
             useBlackVersion: !payload.dark,
         });
 
