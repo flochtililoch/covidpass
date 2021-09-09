@@ -40,7 +40,9 @@ function Index(): JSX.Element {
             <Page content={
                 <div className="space-y-5">
                     <Card content={
-                        <p>{t('common:subtitle')}</p>
+                        <p>
+                            Add your <a className="underline" href="https://myvaccinerecord.cdph.ca.gov">CA Digital COVID Vaccine Record</a> to your iOS wallet app. Please use Safari.
+                        </p>
                     }/>
 
                     <Form/>

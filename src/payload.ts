@@ -3,7 +3,7 @@ import {COLORS} from "./colors";
 import { Code128Reader } from "@zxing/library";
 
 enum CertificateType {
-    Vaccination = 'Vaccination Card',
+    Vaccination = 'Vaccine Record',
 }
 
 enum TextAlignment {
@@ -169,13 +169,7 @@ export class Payload {
 
         // Generate pass data
         this.generic = {
-            headerFields: [
-                {
-                    key: "type",
-                    label: "Digital COVID",
-                    value: this.certificateType
-                }
-            ],
+            headerFields: [],
             primaryFields: [
                 {
                     key: "name",
@@ -254,8 +248,8 @@ export class Payload {
         this.backgroundColor = dark ? body.color : COLORS.WHITE
         this.labelColor = dark ? COLORS.WHITE : COLORS.GREY
         this.foregroundColor = dark ? COLORS.WHITE : COLORS.BLACK
-        this.img1x = dark ? Constants.img1xWhite : Constants.img1xBlack
-        this.img2x = dark ? Constants.img2xWhite : Constants.img2xBlack
+        this.img1x = Constants.img1x
+        this.img2x = Constants.img2x
         this.dark = dark;
     }
 }

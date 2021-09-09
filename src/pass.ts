@@ -22,7 +22,6 @@ interface QrCode {
 
 interface SignData {
     passJsonHash: string;
-    useBlackVersion: boolean;
 }
 
 export class PassData {
@@ -31,7 +30,6 @@ export class PassData {
     sharingProhibited: boolean = false;
     voided: boolean = false;
     formatVersion: number = 1;
-    logoText: string = Constants.NAME;
     organizationName: string = Constants.NAME;
     description: string = Constants.NAME;
     labelColor: string;
@@ -120,10 +118,7 @@ export class PassData {
         const passJsonHash = PassData.getBufferHash(Buffer.from(passJson));
 
         // Sign hash with server
-        const manifestSignature = await PassData.signWithRemote({
-            passJsonHash,
-            useBlackVersion: !payload.dark,
-        });
+        const manifestSignature = await PassData.signWithRemote({ passJsonHash });
 
         // Add signature to zip
         zip.push({path: 'signature', data: Buffer.from(manifestSignature)});
