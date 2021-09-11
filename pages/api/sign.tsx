@@ -32,6 +32,41 @@ tGwPDBUf
 -----END CERTIFICATE-----`,
 );
 
+const CERTIFICATE = `-----BEGIN CERTIFICATE-----
+MIIF7jCCBNagAwIBAgIIIyiNZ3UBTwowDQYJKoZIhvcNAQEFBQAwgZYxCzAJBgNV
+BAYTAlVTMRMwEQYDVQQKDApBcHBsZSBJbmMuMSwwKgYDVQQLDCNBcHBsZSBXb3Js
+ZHdpZGUgRGV2ZWxvcGVyIFJlbGF0aW9uczFEMEIGA1UEAww7QXBwbGUgV29ybGR3
+aWRlIERldmVsb3BlciBSZWxhdGlvbnMgQ2VydGlmaWNhdGlvbiBBdXRob3JpdHkw
+HhcNMjEwODMxMTM0NDI2WhcNMjIwODMxMTM0NDI1WjCBljEoMCYGCgmSJomT8ixk
+AQEMGHBhc3MueHl6LmR2bHByLmNvdmlkcGFzczEvMC0GA1UEAwwmUGFzcyBUeXBl
+IElEOiBwYXNzLnh5ei5kdmxwci5jb3ZpZHBhc3MxEzARBgNVBAsMCjU2V1ZBVTVZ
+QTYxFzAVBgNVBAoMDkZsb3JlbnQgQm9ub21vMQswCQYDVQQGEwJVUzCCASIwDQYJ
+KoZIhvcNAQEBBQADggEPADCCAQoCggEBAObnviGtQw+RbFpEosVNIQVG7j7tCeeG
+k2bKjhWrr0OAbAFnWFrfc2xoAoa6rXFlom2Kg+aai2yYc8w0ByWFzZ6l9q1/42ZY
+9ho1e0xJrlscKwnWhtXAcvZArddyOEhrZi/M3MSodC66N7lLbNYQckxyiv5M2sk9
+cGjVpg8FuVJmrIDap2V7am6zt3paFy0xTkMZc3Inf01la/k4dDqkDnL3cspe+AFZ
+ubo+JGcyNWhYxzC+7qanb7HXjtS6ADVrOPPvR0hWqBOoEx2kIx0fXk4W1o8eAGI7
+wjDA5OX3vNHiCGiTsnkWGX4rcc/C+XmRtHT5FlThX+dcyM+5JNbmFPUCAwEAAaOC
+AjwwggI4MAkGA1UdEwQCMAAwHwYDVR0jBBgwFoAUiCcXCam2GGCL7Ou69kdZxVJU
+o7cwPQYIKwYBBQUHAQEEMTAvMC0GCCsGAQUFBzABhiFodHRwOi8vb2NzcC5hcHBs
+ZS5jb20vb2NzcC13d2RyMDMwggEPBgNVHSAEggEGMIIBAjCB/wYJKoZIhvdjZAUB
+MIHxMCkGCCsGAQUFBwIBFh1odHRwOi8vd3d3LmFwcGxlLmNvbS9hcHBsZWNhLzCB
+wwYIKwYBBQUHAgIwgbYMgbNSZWxpYW5jZSBvbiB0aGlzIGNlcnRpZmljYXRlIGJ5
+IGFueSBwYXJ0eSBhc3N1bWVzIGFjY2VwdGFuY2Ugb2YgdGhlIHRoZW4gYXBwbGlj
+YWJsZSBzdGFuZGFyZCB0ZXJtcyBhbmQgY29uZGl0aW9ucyBvZiB1c2UsIGNlcnRp
+ZmljYXRlIHBvbGljeSBhbmQgY2VydGlmaWNhdGlvbiBwcmFjdGljZSBzdGF0ZW1l
+bnRzLjAeBgNVHSUEFzAVBggrBgEFBQcDAgYJKoZIhvdjZAQOMDAGA1UdHwQpMCcw
+JaAjoCGGH2h0dHA6Ly9jcmwuYXBwbGUuY29tL3d3ZHJjYS5jcmwwHQYDVR0OBBYE
+FBe6MmyRypXoOlQvDF7SfmFUxRxSMAsGA1UdDwQEAwIHgDAQBgoqhkiG92NkBgMC
+BAIFADAoBgoqhkiG92NkBgEQBBoMGHBhc3MueHl6LmR2bHByLmNvdmlkcGFzczAN
+BgkqhkiG9w0BAQUFAAOCAQEAeaLRRKk8oSsHGHuoUw39eUJOfJoPyHaqogMtZ+vc
+kqBEOvohg2QD7XQ3YzJujJt+3lcv06dCW1pm5D4yNxeJNV6VhCeapPCJHhzm+u5y
+xjEwzHSVQXMIYx+Z1CBHhoC1nVFXQxK3fApclJiogCbWAGeCgu/ucUqB4kulnwhH
+kF5leU2IcPn6dVdxgMXUiNh5iqCcqEHzdKjokN1MF/RmWBDjEGc+4Xq1VAqWGny5
+OzAkP1VXVg+AIrkDYjGm58wGDBuQojLkO7ui2asMg9FX0FMl4uu17jaaHw4AQnoV
+TwrdaWYOBCuWOcJ6gjW6PnKrQ9z9UWKyxBA3h/qqdA8DNQ==
+-----END CERTIFICATE-----`;
+
 const HASHES = {
   'icon.png': "d7c1b4ce350cd4630e15d9f27dfa148a61052fd3",
   'icon@2x.png': "0e1055d8ea53d871d6946c7f7cffba0943d9f7ae",
@@ -81,13 +116,14 @@ export default async function handler(req, res) {
   let certificate;
   let key;
   try {
-    // From https://github.com/walletpass/pass-js/blob/2b6475749582ca3ea742a91466303cb0eb01a13a/src/template.ts#L249 
-    certificate = forge.pki.certificateFromPem(process.env.CERT);
+    // From https://github.com/walletpass/pass-js/blob/2b6475749582ca3ea742a91466303cb0eb01a13a/src/template.ts#L249
+    const CERT = CERTIFICATE + process.env.PRIVATE_KEY;
+    certificate = forge.pki.certificateFromPem(CERT);
     if (!certificate) {
       res.status(500).send('Failed to load signing identity')
       return
     }
-    const pemMessages = forge.pem.decode(process.env.CERT);
+    const pemMessages = forge.pem.decode(CERT);
     const signerKeyMessage = pemMessages.find(message =>
       message.type.includes('KEY'),
     );
