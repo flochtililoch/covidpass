@@ -66,7 +66,7 @@ export interface VerifiableCredentials {
         fhirBundle: {
             resourceType: string;
             type: string;
-            entry: [PatientResource, ImmunizationResource, ImmunizationResource];
+            entry: [PatientResource, ImmunizationResource, ImmunizationResource?];
         };
         fhirVersion: string;
     };
@@ -107,7 +107,7 @@ export class Payload {
         const dose1: ImmunizationResource = resources[1];
         const dose2: ImmunizationResource = resources[2];
 
-        if (!patient || !dose1 || !dose2) {
+        if (!patient || !dose1) {
             throw new Error('certificateData');
         }
 
@@ -143,7 +143,6 @@ export class Payload {
 
         // See https://www2a.cdc.gov/vaccines/iis/iisstandards/vaccines.asp?rpt=cvx
         // TODO: Generate this list from URL above
-        // For now, support only 
         const vaccineCodes = {
             "207": {
                 description: "SARS-COV-2 (COVID-19) vaccine, mRNA, spike protein, LNP, preservative free, 100 mcg/0.5mL dose",
@@ -160,12 +159,64 @@ export class Payload {
         };
 
         const vaccineCode = dose1.resource.vaccineCode.coding[0].code;
-        const dateOfVaccination = dose2.resource.occurrenceDateTime;
+        const dateOfVaccination = dose2?.resource.occurrenceDateTime || dose1.resource.occurrenceDateTime;
 
         // Not handling single dose vaccines or dual vaccine injections, nor test / recovery certificates for now
         // Assume both doses were performed by the same provider
         // this.certificateType = CertificateType.Test;
         // this.certificateType = CertificateType.Recovery;
+
+        const backFields = [
+            {
+                key: "vaccine_details",
+                label: "Vaccine details",
+                value: vaccineCodes[vaccineCode].description,
+            },
+            {
+                key: "disclaimer",
+                label: "Disclaimer",
+                value: "This certificate is not a travel document. It is only valid in combination with the ID card of the certificate holder and may expire one year + 14 days after the last dose. The validity of this certificate was not checked by CovidPass."
+            },
+            {
+                key: "lot_number_dose_1",
+                label: "Lot number (first dose)",
+                value: dose1.resource.lotNumber,
+            },
+            {
+                key: "date_dose_1",
+                label: "Occurence date (first dose)",
+                value: dose1.resource.occurrenceDateTime,
+            },
+        ];
+        if (dose1.resource.performer && dose1.resource.performer[0]) {
+            backFields.push({
+                key: "performer_dose_1",
+                label: "Performer (first dose)",
+                value: dose1.resource.performer[0].actor.display,
+            });
+        }
+        
+        if (dose2) {
+            backFields.push(
+                {
+                    key: "lot_number_dose_2",
+                    label: "Lot number (second dose)",
+                    value: dose2.resource.lotNumber,
+                },
+                {
+                    key: "date_dose_2",
+                    label: "Occurence date (second dose)",
+                    value: dose2.resource.occurrenceDateTime,
+                },
+            );
+            if (dose2.resource.performer && dose2.resource.performer[0]) {
+                backFields.push({
+                    key: "performer_dose_2",
+                    label: "Performer (second dose)",
+                    value: dose1.resource.performer[0].actor.display,
+                });
+            }
+        }
 
         // Generate pass data
         this.generic = {
@@ -180,8 +231,8 @@ export class Payload {
             secondaryFields: [
                 {
                     key: "dose",
-                    label: "Dose",
-                    value: "2/2",
+                    label: "Dose(s)",
+                    value: dose2 ? "2" : "1",
                 },
                 {
                     key: "dov",
@@ -203,43 +254,7 @@ export class Payload {
                     textAlignment: TextAlignment.right,
                 }
             ],
-            backFields: [
-                {
-                    key: "lot_number_dose_1",
-                    label: "Lot number (dose 1)",
-                    value: dose1.resource.lotNumber,
-                },
-                {
-                    key: "lot_number_dose_2",
-                    label: "Lot number (dose 2)",
-                    value: dose2.resource.lotNumber,
-                },
-                {
-                    key: "date_dose_1",
-                    label: "Occurence date (dose 1)",
-                    value: dose1.resource.occurrenceDateTime,
-                },
-                {
-                    key: "date_dose_2",
-                    label: "Occurence date (dose 2)",
-                    value: dose2.resource.occurrenceDateTime,
-                },
-                {
-                    key: "performer",
-                    label: "Performer",
-                    value: dose1.resource.performer[0].actor.display,
-                },
-                {
-                    key: "vaccine_details",
-                    label: "Vaccine details",
-                    value: vaccineCodes[vaccineCode].description,
-                },
-                {
-                    key: "disclaimer",
-                    label: "Disclaimer",
-                    value: "This certificate is not a travel document. It is only valid in combination with the ID card of the certificate holder and may expire one year + 14 days after the last dose. The validity of this certificate was not checked by CovidPass."
-                }
-            ]
+            backFields,
         };
 
         // Set Values
