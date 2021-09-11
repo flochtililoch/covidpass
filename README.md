@@ -1,6 +1,6 @@
 ![CovidPass](https://covidpass.dvlpr.xyz/thumbnail.png)
 
-This web app offers the ability to add your California Digital Covid Vaccination Certificates as a pass into your Apple Wallet®. CovidPass accomplishes this without sending your data to a server and instead only uses a hashed representation for the signing step.
+This web app offers the ability to add your [California Digital Covid-19 Vaccine Record](https://myvaccinerecord.cdph.ca.gov/) as a pass into your Apple Wallet®. CovidPass accomplishes this without sending your data to a server and instead only uses a hashed representation for the signing step.
 
 # Getting started
 
@@ -25,11 +25,37 @@ Note that the latter option requires you to have an [Apple Developer Account](ht
 Note that the following options do not have support for actually converting your certificates as they lack the API connection for the signing step.
 You can read about how you can use your own Apple Developer Certificate in the chapter below.
 
+## Get your your own Apple Developer Certificate
+
+* Sign into your [Apple Developer Account](https://developer.apple.com/account/)
+* Go to Certificates, Identifiers and Profiles
+* Register a new Pass Type Identifier under the Identifiers tab
+* Create a new Pass Type ID Certificate under the Certificates tab
+* Select your previously created Pass Type Identifier in the process
+* Move your new certificate to the My Certificates tab in the keychain
+* Export your certificate as a .p12 file
+* Install node.js and download the [passkit-keys](https://github.com/walletpass/pass-js/blob/master/bin/passkit-keys) script
+* Create a `keys` folder and put the .p12 file inside
+* Run ./passkit-keys `<path to your keys folder>`
+* Type in the passphrase you defined during the export step
+* Open the generated .pem file
+* Copy your private key and save to a new file, i.e. ~/Desktop/privatekey.txt
+* Copy your certificate
+* Replace [my certificate](https://github.com/flochtililoch/covidpass/blob/main/pages/api/sign.tsx#L35-L68) with yours
+
+
 ### Debug the web app
 
 ```sh
 yarn install
-yarn dev
+PASSPHRASE=<replace with your passphrase> PRIVATE_KEY=`cat ~/Desktop/privatekey.txt` yarn dev
+```
+
+### Run the web app in prod
+
+```sh
+yarn build
+PASSPHRASE=<replace with your passphrase> PRIVATE_KEY=`cat ~/Desktop/privatekey.txt` BASE_URL=https://your.own.domain yarn start
 ```
 
 # FAQ
@@ -42,32 +68,9 @@ Processing of your data happens entirely in your browser and only a hashed repre
 
 Navigate to the "TouchID & Code" or "FaceID & Code" or just "Code" section in the Settings and switch the toggle to off for Wallet in the section "Allow access from the lock screen". Also see [this official guide](https://support.apple.com/guide/iphone/control-access-information-lock-screen-iph9a2a69136/ios) from Apple.
 
-#### Why don't the official apps offer this feature?
-
-The official apps like [Corona-Warn-App](https://github.com/corona-warn-app/cwa-app-ios) have decided against this feature due to security concerns. For example, this was discussed [here](https://github.com/eu-digital-green-certificates/dgca-wallet-app-ios/issues/69) or [here](https://github.com/corona-warn-app/cwa-app-ios/issues/2965).
-
 #### Why is my certificate not recognized?
 
 We are in an early development stage and actively working on improving support for all vaccines. Feel free to create an issue describing the problem you faced.
-
-# Using your own Apple Developer Certificate
-
-## Get your certificate
-
-* Sign into your [Apple Developer Account](https://developer.apple.com/account/)
-* Go to Certificates, Identifiers and Profiles
-* Register a new Pass Type Identifier under the Identifiers tab
-* Create a new Pass Type ID Certificate under the Certificates tab
-* Select your previously created Pass Type Identifier in the process
-* Move your new certificate to the My Certificates tab in the keychain
-* Export your certificate as a .p12 file
-
-
-* Install node.js and download the [passkit-keys](https://github.com/walletpass/pass-js/blob/master/bin/passkit-keys) script
-* Create a `keys` folder and put the .p12 file inside
-* Run ./passkit-keys `<path to your keys folder>`
-* You may have to type in the passphrase you defined during the export step
-* Base64 encode the contents of the newly generated .pem file inside the keys folder
 
 # Explanation of the process
 
