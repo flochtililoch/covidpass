@@ -10,7 +10,7 @@ function Index(): JSX.Element {
     const { t } = useTranslation(['common', 'index', 'errors']);
 
     const title = 'CovidPass';
-    const description = 'Add your CA Digital COVID Vaccine Record to your iOS wallet app.';
+    const description = 'Add your California Digital COVID Vaccine Record to your Apple Wallet®.';
 
     return (
         <>
@@ -18,10 +18,17 @@ function Index(): JSX.Element {
                 title={title}
                 description={description}
                 openGraph={{
-                    url: 'https://covidpass.dvlpr.xyz/',
+                    url: process.env.BASE_URL,
                     title: title,
                     description: description,
-                    images: [],
+                    images: [
+                        {
+                            url: `${process.env.BASE_URL}/thumbnail.png`,
+                            width: 1000,
+                            height: 500,
+                            alt: description,
+                        }
+                    ],
                     site_name: title,
                 }}
                 twitter={{
@@ -34,7 +41,7 @@ function Index(): JSX.Element {
                 <div className="space-y-5">
                     <Card content={
                         <p>
-                            Add your <a className="underline" href="https://myvaccinerecord.cdph.ca.gov">CA Digital COVID Vaccine Record</a> to your iOS wallet app. Please use Safari.
+                            Add your <a className="underline" href="https://myvaccinerecord.cdph.ca.gov">California Digital COVID Vaccine Record</a> to your Apple Wallet®. Please use Safari.
                         </p>
                     }/>
 

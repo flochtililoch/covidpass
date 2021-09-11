@@ -6,7 +6,7 @@ interface CardProps {
 
 function Card(props: CardProps): JSX.Element {
     return (
-        <div className="rounded-md p-6 bg-gray-100 dark:bg-gray-600 space-y-4">
+        <div className="rounded-md p-6 bg-white dark:bg-gray-600 space-y-4">
             {
                 props.step &&
                 <div className="flex flex-row items-center">
