@@ -10,7 +10,7 @@ function Index(): JSX.Element {
     const { t } = useTranslation(['common', 'index', 'errors']);
 
     const title = 'CovidPass';
-    const description = 'Add your EU Digital COVID Certificates to your favorite wallet app.';
+    const description = 'Add your CA Digital COVID Vaccine Record to your iOS wallet app.';
 
     return (
         <>
@@ -18,22 +18,15 @@ function Index(): JSX.Element {
                 title={title}
                 description={description}
                 openGraph={{
-                    url: 'https://covidpass.marvinsextro.de/',
+                    url: 'https://covidpass.dvlpr.xyz/',
                     title: title,
                     description: description,
-                    images: [
-                        {
-                            url: 'https://covidpass.marvinsextro.de/thumbnail.png',
-                            width: 1000,
-                            height: 500,
-                            alt: description,
-                        }
-                    ],
+                    images: [],
                     site_name: title,
                 }}
                 twitter={{
-                    handle: '@marvinsxtr',
-                    site: '@marvinsxtr',
+                    handle: '@flochtililoch',
+                    site: '@flochtililoch',
                     cardType: 'summary_large_image',
                 }}
             />
