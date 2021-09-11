@@ -10,7 +10,7 @@ function Card(props: CardProps): JSX.Element {
             {
                 props.step &&
                 <div className="flex flex-row items-center">
-                    <div className="rounded-full p-4 bg-gray-600 h-5 w-5 flex items-center justify-center">
+                    <div className="rounded-full p-4 bg-gray-400 h-5 w-5 flex items-center justify-center">
                         <p className="text-white text-lg font-bold">
                             {props.step}
                         </p>

@@ -12,7 +12,7 @@ function Logo(): JSX.Element {
                 />
 
 
-                <h1 className="text-4xl font-bold ml-2">
+                <h1 className="text-3xl font-bold ml-4">
                     {t('common:title')}
                 </h1>
             </a>
