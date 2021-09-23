@@ -220,7 +220,13 @@ export class Payload {
 
         // Generate pass data
         this.generic = {
-            headerFields: [],
+            headerFields: [
+                {
+                    key: "type",
+                    label: "CA Digital COVID",
+                    value: "Vaccine Record",
+                }
+            ],
             primaryFields: [
                 {
                     key: "name",
@@ -263,8 +269,8 @@ export class Payload {
         this.backgroundColor = dark ? body.color : COLORS.WHITE
         this.labelColor = dark ? COLORS.WHITE : COLORS.GREY
         this.foregroundColor = dark ? COLORS.WHITE : COLORS.BLACK
-        this.img1x = Constants.img1x
-        this.img2x = Constants.img2x
+        this.img1x = dark ? Constants.img1xWhite : Constants.img1xBlack
+        this.img2x = dark ? Constants.img2xWhite : Constants.img2xBlack
         this.dark = dark;
     }
 }

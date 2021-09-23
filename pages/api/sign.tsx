@@ -68,10 +68,18 @@ TwrdaWYOBCuWOcJ6gjW6PnKrQ9z9UWKyxBA3h/qqdA8DNQ==
 -----END CERTIFICATE-----`;
 
 const HASHES = {
-  'icon.png': "d7c1b4ce350cd4630e15d9f27dfa148a61052fd3",
-  'icon@2x.png': "0e1055d8ea53d871d6946c7f7cffba0943d9f7ae",
-  'logo.png': "d7c1b4ce350cd4630e15d9f27dfa148a61052fd3",
-  'logo@2x.png': "0e1055d8ea53d871d6946c7f7cffba0943d9f7ae",
+  DARK: {
+    'icon.png': "8fe995e82fa5fa28178df005a1340ae52dcf60e3",
+    'icon@2x.png': "28cbd85eee40f0ac79a1cfe96524a64036c9cb9e",
+    'logo.png': "8fe995e82fa5fa28178df005a1340ae52dcf60e3",
+    'logo@2x.png': "28cbd85eee40f0ac79a1cfe96524a64036c9cb9e",
+  },
+  LIGHT: {
+    'icon.png': "9dcdd385e848610f020cf3bfc65ddc413beb5e87",
+    'icon@2x.png': "4e8a383fd25dc26c686f8ac70f2a251d5bd60979",
+    'logo.png': "9dcdd385e848610f020cf3bfc65ddc413beb5e87",
+    'logo@2x.png': "4e8a383fd25dc26c686f8ac70f2a251d5bd60979",
+  },
 };
 
 function initMiddleware(middleware) {
@@ -110,7 +118,7 @@ export default async function handler(req, res) {
 
   const manifest = JSON.stringify({
     'pass.json': req.body.passJsonHash,
-    ...HASHES,
+    ...(req.body.useBlackVersion ? HASHES.LIGHT : HASHES.DARK),
   });
 
   let certificate;
